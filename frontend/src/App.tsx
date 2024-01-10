@@ -11,8 +11,11 @@ import {
 } from "react-router-dom";
 
 export default function App() {
+
+  let toggle = false
+
   return (
-    <section>
+    <section className={`h-full bg-white ${ toggle ? 'invert' : ''}`}>
   <Router>
     <EntryProvider>
     <NavBar></NavBar>
