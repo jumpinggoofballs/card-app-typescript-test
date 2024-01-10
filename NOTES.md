@@ -1,6 +1,6 @@
-# Notes 
+# Notes
 
-- I have double commits for every step in Github. This is a bug from VSCode Insiders. Was not a priority to fix while I was working on the rest of this. 
+- I have double commits for every step in Github. This is a bug from VSCode Insiders. Was not a priority to fix while I was working on the rest of this.
 - Backend `npm install` warned about vulnerabilities so I ran both `npm update` and subsequently `npm audit fix --force`
 - Prisma does not have `binaryTargets` for my up-to-date Fedora so had to use an Ubuntu 22.04 container
 - The Ubuntu 22.04 default version of `node` is incompatible with the codebase, so had to update that independent of the distribution. (So using version 21.x)
