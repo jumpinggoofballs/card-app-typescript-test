@@ -1,8 +1,11 @@
+# Notes 
+
+- I have double commits for every step in Github. This is a bug from VSCode Insiders. Was not a priority to fix while I was working on the rest of this. 
 - Backend `npm install` warned about vulnerabilities so I ran both `npm update` and subsequently `npm audit fix --force`
-- Prisma does not have `binaryTargets` for up-to-date Fedora so had to use Ubuntu 22.04 container
-- The Ubuntu 22.04 default version of `node` is incompatible with the codebase, so had to update that independent of the distribution.
+- Prisma does not have `binaryTargets` for my up-to-date Fedora so had to use an Ubuntu 22.04 container
+- The Ubuntu 22.04 default version of `node` is incompatible with the codebase, so had to update that independent of the distribution. (So using version 21.x)
 - Frontend `npm install` warned about vulnerabilities, and I fixed them with `npm audit fix --force`
-- Since there was no set-up for the normal Tailwind way of implementing "dark mode" (https://tailwindcss.com/docs/dark-mode) I decided against going through all the elements in the app to add custom `class="dark:*"` and instead did a global tailwind `class="invert"` on the root section of the React App.tsx. This looks suprisingly okay without further tweaking.
+- Since there was no set-up for the normal Tailwind way of implementing "dark mode" (https://tailwindcss.com/docs/dark-mode) I decided against going through all the elements in the app to add custom `class="dark:*"` and instead did a global tailwind `class="invert"` on the root `<section>` of the React App.tsx. This looks suprisingly okay without further tweaking.
 - Had to move the EntryProvider to `main.tsx` so I can change the theme for the whole `App.tsx`
 - Added `scheduled_for` column to the database by adding that field to the Entry model in `backend/prisma/schema.prisma` and running `npx prisma migrate dev --name added_scheduled_for_column`
-- It does not make sense to have an input field for when an event was created. So I converted that input field for the new field of `scheduled_for`, and I set `created_at` to `Date().now`
+- It does not make sense to have an input field for when an event was created. So I converted that input field for the new field of `scheduled_for`, and I set `created_at` to the present `Date()` in all appropriate places.
