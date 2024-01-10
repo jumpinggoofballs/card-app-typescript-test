@@ -6,6 +6,7 @@ export const EntryContext = createContext<EntryContextType | null>(null);
 
 export const EntryProvider: React.FC<{children : ReactNode}> = ({children}) => {
     const [entries, setEntries] = useState<Entry[]>([]);
+    const [darkTheme, setDarkTheme] = useState(false);
 
     const initState = async () => {
         const data = await axios.get<Entry[]>('http://localhost:3001/get/')
@@ -36,8 +37,11 @@ export const EntryProvider: React.FC<{children : ReactNode}> = ({children}) => {
         await axios.delete<Entry>(`http://localhost:3001/delete/${id}`)
         setEntries(e => e.filter(entry => entry.id != id))
     }
+    const changeTheme = () => {
+      setDarkTheme(!darkTheme)
+    }
     return (
-        <EntryContext.Provider value={{ entries, saveEntry, updateEntry, deleteEntry }}>
+        <EntryContext.Provider value={{ entries, saveEntry, updateEntry, deleteEntry, darkTheme, changeTheme }}>
           {children}
         </EntryContext.Provider>
       )
