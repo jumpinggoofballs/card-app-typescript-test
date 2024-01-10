@@ -4,4 +4,4 @@
 - Frontend `npm install` warned about vulnerabilities, and I fixed them with `npm audit fix --force`
 - Since there was no set-up for the normal Tailwind way of implementing "dark mode" (https://tailwindcss.com/docs/dark-mode) I decided against going through all the elements in the app to add custom `class="dark:*"` and instead did a global tailwind `class="invert"` on the root section of the React App.tsx. This looks suprisingly okay without further tweaking.
 - Had to move the EntryProvider to `main.tsx` so I can change the theme for the whole `App.tsx`
-- Added `scheduled_for` column to the database by adding that field to the Entry model in `backend/prisma/schema.prisma` and running `npx prisma migrate dev --name added_scheduled_for_column` 
+- Added `scheduled_for` column to the database by adding that field to the Entry model in `backend/prisma/schema.prisma` and running `npx prisma migrate dev --name added_scheduled_for_column`
