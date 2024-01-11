@@ -9,3 +9,5 @@
 - Had to move the EntryProvider to `main.tsx` so I can change the theme for the whole `App.tsx`
 - Added `scheduled_for` column to the database by adding that field to the Entry model in `backend/prisma/schema.prisma` and running `npx prisma migrate dev --name added_scheduled_for_column`
 - It does not make sense to have an input field for when an event was created. So I converted that input field for the new field of `scheduled_for`, and I set `created_at` to the present `Date()` in all appropriate places.
+- Testing is set up with `jest`, so tried working with that - even though the official documentation for `fastify` does not cover `jest` and instead they recommend using `tap`.
+- I was weary of adding dependencies to the provided code, so I avoided setting up anything like `supertest` or `jest-mock-extended`. That means I am running the tests on the same database as the live app. Advantage: verifies that the actual server + database are working well. Disadvantage: temporarily adds garbage data into the actual database (at least in the local dev environment).  
