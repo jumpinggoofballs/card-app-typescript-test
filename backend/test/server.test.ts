@@ -1,9 +1,15 @@
-import { server } from "../src/server"
-import { Entry } from "@prisma/client"
+import { Entry } from "@prisma/client";
+import { server } from "../src/server";
 
-// An entry to be used in the tests with payloads 
+// An entry to be used in the tests with payloads
 const entryId = "test";
-const randomEntry: Entry = { id: entryId, title: "Random", description: "Entry", created_at: new Date(), scheduled_for: new Date() };
+const randomEntry: Entry = {
+  id: entryId,
+  title: "Random",
+  description: "Entry",
+  created_at: new Date(),
+  scheduled_for: new Date(),
+};
 
 describe("Testing jest", () => {
   it("should assert 1 + 1 is 2", () => {
@@ -11,58 +17,58 @@ describe("Testing jest", () => {
   });
 });
 
-test('GET /get/ should return a list of items', async () => {
+test("GET /get/ should return a list of items", async () => {
   const response = await server.inject({
-    method: 'GET',
-    url: '/get/',
+    method: "GET",
+    url: "/get/",
   });
 
   expect(response.statusCode).toBe(200);
   expect(response.json()).toBeInstanceOf(Array);
 });
 
-test('GET /get/:id should return 500 if the specified item id is not found', async () => {
+test("GET /get/:id should return 500 if the specified item id is not found", async () => {
   const response = await server.inject({
-    method: 'GET',
-    url: '/get/non-existent',
+    method: "GET",
+    url: "/get/non-existent",
   });
 
-  expect(response.statusCode).toBe(500);  // NOTE: this is not using the normal 404 status code in the server app
+  expect(response.statusCode).toBe(500); // NOTE: this is not using the normal 404 status code in the server app
 });
 
-test('POST /create should return a created ', async () => {  
+test("POST /create should return a created ", async () => {
   const response = await server.inject({
-    method: 'POST',
-    url: '/create/',
-    payload: randomEntry
+    method: "POST",
+    url: "/create/",
+    payload: randomEntry,
   });
 
   expect(response.statusCode).toBe(200);
-  expect(response.json().id).toBe('test');
+  expect(response.json().id).toBe("test");
 });
 
 test('PUT /update/:id should change the "test" entry title', async () => {
   const updatedEntry = { ...randomEntry, title: "Intentional" };
 
   const response = await server.inject({
-    method: 'PUT',
-    url: '/update/' + entryId,
-    payload: updatedEntry
+    method: "PUT",
+    url: "/update/" + entryId,
+    payload: updatedEntry,
   });
 
   const contentTest = await server.inject({
-    method: 'GET',
-    url: '/get/' + entryId,
+    method: "GET",
+    url: "/get/" + entryId,
   });
 
   expect(response.statusCode).toBe(200);
-  expect(contentTest.json().title).toBe('Intentional');
-})
+  expect(contentTest.json().title).toBe("Intentional");
+});
 
 test('DELETE /delete/:id should delete the entry generated above with the id = "test"', async () => {
   const response = await server.inject({
-    method: 'DELETE',
-    url: '/delete/' + entryId
+    method: "DELETE",
+    url: "/delete/" + entryId,
   });
 
   expect(response.statusCode).toBe(200);
