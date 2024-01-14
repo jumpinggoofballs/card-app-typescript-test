@@ -57,14 +57,14 @@ test("POST /create with invalid Entry should return error", async () => {
   expect(response.statusCode).toBe(500);
 });
 
-test("GET /get/test should get the Random Entry",async () => {
+test("GET /get/test should get the Random Entry", async () => {
   const response = await server.inject({
     method: "GET",
     url: "/get/test",
   });
 
   expect(response.json().title).toBe("Random");
-})
+});
 
 test("PUT /update/:id should change the 'test' entry title", async () => {
   const updatedEntry = { ...randomEntry, title: "Intentional" };
