@@ -5,8 +5,7 @@ import NavBar from "./components/NavBar";
 import AllEntries from "./routes/AllEntries";
 import EditEntry from "./routes/EditEntry";
 import NewEntry from "./routes/NewEntry";
-import { ThemeContext } from "./utilities/globalContext";
-import { EntryProvider } from "./utilities/globalContext";
+import { EntryProvider, ThemeContext } from "./utilities/globalContext";
 
 export default function App() {
   const { darkTheme } = useContext(ThemeContext) as ThemeContextType;

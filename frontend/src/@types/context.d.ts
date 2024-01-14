@@ -15,4 +15,4 @@ export type EntryContextType = {
 export type ThemeContextType = {
   darkTheme: boolean;
   changeTheme: () => void;
-}
+};

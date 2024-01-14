@@ -37,9 +37,7 @@ export const EntryProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   };
 
   return (
-    <EntryContext.Provider value={{ entries, saveEntry, updateEntry, deleteEntry }}>
-      {children}
-    </EntryContext.Provider>
+    <EntryContext.Provider value={{ entries, saveEntry, updateEntry, deleteEntry }}>{children}</EntryContext.Provider>
   );
 };
 
@@ -52,9 +50,5 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     setDarkTheme(!darkTheme);
   };
 
-  return (
-    <ThemeContext.Provider value={{ darkTheme, changeTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-}
+  return <ThemeContext.Provider value={{ darkTheme, changeTheme }}>{children}</ThemeContext.Provider>;
+};
