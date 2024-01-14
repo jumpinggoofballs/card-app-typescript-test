@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { Entry, EntryContextType } from "../@types/context";
-import { EntryContext } from "../utilities/globalContext";
+import { ThemeContextType } from "../@types/context";
+import { ThemeContext } from "../utilities/globalContext";
 
 export default function NavBar() {
-  const { changeTheme } = useContext(EntryContext) as EntryContextType;
+  const { changeTheme } = useContext(ThemeContext) as ThemeContextType;
 
   return (
     <nav className="flex justify-center gap-5">
