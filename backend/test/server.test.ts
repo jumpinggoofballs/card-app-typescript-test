@@ -36,7 +36,7 @@ test("GET /get/:id should return 500 if the specified item id is not found", asy
   expect(response.statusCode).toBe(500); // NOTE: this is not using the normal 404 status code in the server app
 });
 
-test("POST /create should return a created ", async () => {
+test("POST /create should return a created Entry", async () => {
   const response = await server.inject({
     method: "POST",
     url: "/create/",
@@ -47,7 +47,26 @@ test("POST /create should return a created ", async () => {
   expect(response.json().id).toBe("test");
 });
 
-test('PUT /update/:id should change the "test" entry title', async () => {
+test("POST /create with invalid Entry should return error", async () => {
+  const response = await server.inject({
+    method: "POST",
+    url: "/create/",
+    payload: {},
+  });
+
+  expect(response.statusCode).toBe(500);
+});
+
+test("GET /get/test should get the Random Entry",async () => {
+  const response = await server.inject({
+    method: "GET",
+    url: "/get/test",
+  });
+
+  expect(response.json().title).toBe("Random");
+})
+
+test("PUT /update/:id should change the 'test' entry title", async () => {
   const updatedEntry = { ...randomEntry, title: "Intentional" };
 
   const response = await server.inject({
@@ -65,11 +84,30 @@ test('PUT /update/:id should change the "test" entry title', async () => {
   expect(contentTest.json().title).toBe("Intentional");
 });
 
-test('DELETE /delete/:id should delete the entry generated above with the id = "test"', async () => {
+test("PUT /update/non-existent should return error code 500", async () => {
+  const response = await server.inject({
+    method: "PUT",
+    url: "/update/non-existent",
+    payload: randomEntry,
+  });
+
+  expect(response.statusCode).toBe(500);
+});
+
+test("DELETE /delete/:id should delete the entry generated above with the id = 'test'", async () => {
   const response = await server.inject({
     method: "DELETE",
     url: "/delete/" + entryId,
   });
 
   expect(response.statusCode).toBe(200);
+});
+
+test("DELETE /delete/non-existent should return error code 500", async () => {
+  const response = await server.inject({
+    method: "DELETE",
+    url: "/delete/non-existent",
+  });
+
+  expect(response.statusCode).toBe(500);
 });
